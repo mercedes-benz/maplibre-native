@@ -218,7 +218,7 @@ class MapLibreMapOptionsTest : BaseTest() {
     @Test
     fun testMaxPitch() {
         Assert.assertEquals(
-            MapLibreConstants.MAXIMUM_PITCH.toDouble(),
+            MapLibreConstants.DEFAULT_MAXIMUM_PITCH.toDouble(),
             MapLibreMapOptions().maxPitchPreference,
             DELTA
         )

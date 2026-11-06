@@ -3,6 +3,7 @@ package org.maplibre.android.maps
 import android.os.Looper.getMainLooper
 import org.maplibre.android.camera.CameraPosition
 import org.maplibre.android.camera.CameraUpdateFactory
+import org.maplibre.android.constants.MapLibreConstants
 import org.maplibre.android.geometry.LatLng
 import io.mockk.*
 import org.junit.Before
@@ -183,6 +184,48 @@ class TransformTest : BaseTest() {
     fun testMaxPitch() {
         transform.maxPitch = 10.0
         verify { nativeMapView.maxPitch = 10.0 }
+    }
+
+    @Test
+    fun testMaxPitchAboveDefault() {
+        transform.maxPitch = 90.0
+        transform.maxPitch = MapLibreConstants.MAXIMUM_PITCH.toDouble()
+        verify { nativeMapView.maxPitch = 90.0 }
+        verify { nativeMapView.maxPitch = 180.0 }
+    }
+
+    @Test
+    fun testMaxPitchOutOfRangeIgnored() {
+        transform.maxPitch = 180.5
+        transform.maxPitch = -1.0
+        verify(exactly = 0) { nativeMapView.maxPitch = any() }
+    }
+
+    @Test
+    fun testMinPitchAboveDefault() {
+        transform.minPitch = 90.0
+        transform.minPitch = MapLibreConstants.MAXIMUM_PITCH.toDouble()
+        verify { nativeMapView.minPitch = 90.0 }
+        verify { nativeMapView.minPitch = 180.0 }
+    }
+
+    @Test
+    fun testMinPitchOutOfRangeIgnored() {
+        transform.minPitch = 180.5
+        transform.minPitch = -1.0
+        verify(exactly = 0) { nativeMapView.minPitch = any() }
+    }
+
+    @Test
+    fun testInitialiseAppliesMaxPitchBeforeMinPitch() {
+        val options = MapLibreMapOptions().minPitchPreference(90.0).maxPitchPreference(120.0)
+
+        transform.initialise(mockk(), options)
+
+        verifyOrder {
+            nativeMapView.maxPitch = 120.0
+            nativeMapView.minPitch = 90.0
+        }
     }
 
     @Test

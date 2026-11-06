@@ -82,6 +82,14 @@ class CameraPositionTest : BaseTest() {
     }
 
     @Test
+    fun testTiltBuilderClamp() {
+        Assert.assertEquals(0.0, CameraPosition.Builder().tilt(-5.0).build().tilt, DELTA)
+        Assert.assertEquals(120.0, CameraPosition.Builder().tilt(120.0).build().tilt, DELTA)
+        Assert.assertEquals(180.0, CameraPosition.Builder().tilt(180.0).build().tilt, DELTA)
+        Assert.assertEquals(180.0, CameraPosition.Builder().tilt(200.0).build().tilt, DELTA)
+    }
+
+    @Test
     fun testToString() {
         val latLng = LatLng(1.0, 2.0)
         val cameraPosition =

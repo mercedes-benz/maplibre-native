@@ -139,24 +139,29 @@ public class MapLibreConstants {
   public static final float MAXIMUM_ZOOM = 25.5f;
 
   /**
-   * The currently supported minimum pitch level.
+   * The currently supported minimum pitch level. Tilt and pitch are the same angle.
    */
   public static final float MINIMUM_PITCH = 0.0f;
 
   /**
-   * The currently supported maximum pitch level.
+   * The default maximum pitch level, used unless a different maximum pitch is configured.
    */
-  public static final float MAXIMUM_PITCH = 60.0f;
+  public static final float DEFAULT_MAXIMUM_PITCH = 60.0f;
 
   /**
-   * The currently supported maximum tilt value.
+   * The currently supported maximum pitch level. Matches the core's PITCH_MAX.
    */
-  public static final double MAXIMUM_TILT = 60;
+  public static final float MAXIMUM_PITCH = 180.0f;
 
   /**
-   * The currently supported minimum tilt value.
+   * The currently supported maximum tilt value, same as {@link #MAXIMUM_PITCH}.
    */
-  public static final double MINIMUM_TILT = 0;
+  public static final double MAXIMUM_TILT = MAXIMUM_PITCH;
+
+  /**
+   * The currently supported minimum tilt value, same as {@link #MINIMUM_PITCH}.
+   */
+  public static final double MINIMUM_TILT = MINIMUM_PITCH;
 
   /**
    * The currently supported maximum direction

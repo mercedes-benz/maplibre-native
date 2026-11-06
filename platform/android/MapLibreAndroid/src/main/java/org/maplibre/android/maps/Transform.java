@@ -63,8 +63,9 @@ public class Transform implements MapView.OnCameraDidChangeListener {
     }
     setMinZoom(options.getMinZoomPreference());
     setMaxZoom(options.getMaxZoomPreference());
-    setMinPitch(options.getMinPitchPreference());
+    // max before min: core rejects a min pitch above the current max, which starts at the 60° default
     setMaxPitch(options.getMaxPitchPreference());
+    setMinPitch(options.getMinPitchPreference());
   }
 
   //

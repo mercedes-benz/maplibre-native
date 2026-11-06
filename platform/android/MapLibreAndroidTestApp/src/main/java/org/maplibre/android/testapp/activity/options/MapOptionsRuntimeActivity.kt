@@ -37,7 +37,7 @@ class MapOptionsRuntimeActivity : AppCompatActivity(), OnMapReadyCallback {
                     .tilt(0.0)
                     .build()
             )
-            maxPitchPreference(90.0)
+            maxPitchPreference(60.0)
             minPitchPreference(0.0)
             maxZoomPreference(26.0)
             minZoomPreference(2.0)

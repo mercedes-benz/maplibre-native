@@ -2,6 +2,7 @@
 
 ## main
 
+- Raise the upper bound for pitch and tilt (`MapLibreConstants.MAXIMUM_PITCH` and `MapLibreConstants.MAXIMUM_TILT`) from 60° to 180°, matching the core. The default maximum pitch stays at 60° (`MapLibreConstants.DEFAULT_MAXIMUM_PITCH`); use `MapLibreMapOptions.maxPitchPreference()` or `MapLibreMap.setMaxPitchPreference()` to allow more tilt.
 - Make symbol guard checks opt-in, so symbol-dense tiles load faster. To keep them, set the environment variable `MLN_SYMBOL_GUARDS=1` before the first map loads.
 
 ### 🐞 Bug fixes

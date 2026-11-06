@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         app:maplibre_apiBaseUri="https://api.maplibre.org"
         app:maplibre_cameraBearing="0.0"
-        app:maplibre_cameraPitchMax="90.0"
+        app:maplibre_cameraPitchMax="60.0"
         app:maplibre_cameraPitchMin="0.0"
         app:maplibre_cameraTargetLat="42.31230486601532"
         app:maplibre_cameraTargetLng="64.63967338936439"

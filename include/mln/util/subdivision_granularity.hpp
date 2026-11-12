@@ -9,7 +9,7 @@
 namespace mln {
 
 /// How finely tile geometry is split so the vertex shader can bend it onto the globe; port of GL JS
-/// `subdivision_granularity_settings.ts`.
+/// `subdivision_granularity_settings.ts` (the subdivision rule was modified though).
 class SubdivisionGranularityExpression {
 public:
     constexpr SubdivisionGranularityExpression(uint32_t baseZoomGranularity_, uint32_t minGranularity_)
@@ -18,10 +18,10 @@ public:
         assert(minGranularity <= baseZoomGranularity || baseZoomGranularity == 0);
     }
 
-    /// The base granularity halves with every zoom level, down to the minimum and never below 1. A build without the
+    /// The base granularity halves with every second zoom level, down to the minimum and never below 1. A build without the
     /// globe never subdivides, which lets the linker drop the subdivision code.
     uint32_t getGranularityForZoomLevel(uint8_t zoom) const {
-        return util::GLOBE_ENABLED ? std::max({zoom < 32 ? baseZoomGranularity >> zoom : 0u, minGranularity, 1u}) : 1u;
+        return util::GLOBE_ENABLED ? std::max({zoom < 32 ? baseZoomGranularity >> (zoom/2u) : 0u, minGranularity, 1u}) : 1u;
     }
 
     bool operator==(const SubdivisionGranularityExpression&) const = default;
@@ -45,7 +45,7 @@ struct SubdivisionGranularitySetting {
 
     /// GL JS's globe values.
     static constexpr SubdivisionGranularitySetting globe() {
-        return {.fill = {128, 2}, .line = {512, 0}, .tile = {128, 32}, .stencil = {128, 1}, .circle = 3};
+        return {.fill = {64, 0}, .line = {32, 0}, .tile = {64, 0}, .stencil = {64, 0}, .circle = 3};
     }
 };
 
